@@ -4,6 +4,14 @@
     <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .add-form-name.error,
+      .add-form-text.error {
+        border: 2px solid #ef5350;
+        background-color: #ffebee;
+        outline: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -85,16 +93,20 @@
 
       let isValid = true;
       
-      if (!nameValue) {
-        nameInput.classList.add('error');
+      if (!nameValue || !commentValue)  {
         isValid = false;
-        alert("Ведите имя")
-      }
+
+        
+          if (!nameValue) nameInput.classList.add('error');
+          if (!commentValue) commentInput.classList.add('error');
+
+          
+          const missing = [];
+          if (!nameValue) missing.push('имя');
+          if (!commentValue) missing.push('комментарий');
+
       
-      if (!commentValue) {
-        commentInput.classList.add('error');
-        isValid = false;
-        alert("Ведите комментарий")
+          alert(`Введите ${missing.join(' и ')}`);
       }
       
       if (!isValid) return;
